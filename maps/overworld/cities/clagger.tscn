@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://deu34o2o6aqq"]
+
+[ext_resource type="PackedScene" uid="uid://bwbxjswm3r7c7" path="res://actors/city/city.tscn" id="1_ej23g"]
+
+[node name="Clagger" type="Node2D"]
+modulate = Color(1, 0.266602, 0.310129, 1)
+
+[node name="City" parent="." instance=ExtResource("1_ej23g")]

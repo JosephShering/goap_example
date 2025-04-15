@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bwbxjswm3r7c7"]
+
+[ext_resource type="Script" uid="uid://c8domyhnggnyn" path="res://actors/city/city.gd" id="1_7fr10"]
+[ext_resource type="Texture2D" uid="uid://c0v6stqbkf4uu" path="res://spritesheets/monochrome-transparent.png" id="2_qv11c"]
+[ext_resource type="Texture2D" uid="uid://c65ijiwwv3edg" path="res://resources/spritesheet.tres" id="3_cirn8"]
+[ext_resource type="Script" uid="uid://tyd5iqscpqmg" path="res://actors/city/city_food_particle.gd" id="4_m42c3"]
+
+[sub_resource type="Curve" id="Curve_2fmkd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.11165, 1), 0.0, 0.0, 0, 0, Vector2(0.889737, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_2kpsc"]
+curve = SubResource("Curve_2fmkd")
+
+[sub_resource type="Curve" id="Curve_jcmug"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.283228, 1), 0.0, 0.0, 0, 0, Vector2(0.59019, 0.879893), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dra50"]
+curve = SubResource("Curve_jcmug")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtvt3"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(0.2, 0.2, 1)
+direction = Vector3(0, -1, 0)
+spread = 11.25
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.75
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_dra50")
+color = Color(1, 0.533333, 0.607843, 1)
+alpha_curve = SubResource("CurveTexture_2kpsc")
+turbulence_noise_speed = Vector3(-20, -20, 0)
+turbulence_influence_min = 0.843
+turbulence_influence_max = 1.0
+turbulence_initial_displacement_min = -20.3
+turbulence_initial_displacement_max = -17.6
+
+[node name="City" type="Node2D" groups=["cities"]]
+script = ExtResource("1_7fr10")
+
+[node name="CitySprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.752674, 0.815878, 0.916325, 1)
+texture_filter = 1
+texture = ExtResource("2_qv11c")
+region_enabled = true
+region_rect = Rect2(85, 323, 16, 16)
+
+[node name="GPUParticles" type="GPUParticles2D" parent="." node_paths=PackedStringArray("city")]
+texture_filter = 1
+emitting = false
+amount = 1
+texture = ExtResource("3_cirn8")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.26
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_wtvt3")
+script = ExtResource("4_m42c3")
+city = NodePath("..")
