@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0cvs3rum2bhk"]
+[gd_scene load_steps=8 format=3 uid="uid://b0cvs3rum2bhk"]
 
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://citqktxofcijk" path="res://maps/overworld/overworld.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://ytvnk63qbskw" path="res://actors/camera_controller.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cj3d8c6q7uvwm" path="res://actors/trader/trader.tscn" id="6_7mycd"]
 
 [sub_resource type="Resource" id="Resource_lquwl"]
 script = ExtResource("4_7mycd")
@@ -15,7 +16,8 @@ ease = 2
 [node name="Main" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+position = Vector2(127, -42)
+zoom = Vector2(4, 4)
 
 [node name="ColorRect" type="ColorRect" parent="Camera"]
 z_index = -1
@@ -49,8 +51,9 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 [node name="Overworld" parent="Level" instance=ExtResource("1_ig7tw")]
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(127, -42)
 script = ExtResource("3_lquwl")
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
 snap_to_pixel = true
 frame_preview = false
 tween_resource = SubResource("Resource_lquwl")
@@ -60,3 +63,8 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 script = ExtResource("5_lquwl")
 camera = NodePath("../PhantomCamera2D")
 metadata/_custom_type_script = "uid://ytvnk63qbskw"
+
+[node name="Traders" type="Node2D" parent="."]
+
+[node name="Trader" parent="Traders" instance=ExtResource("6_7mycd")]
+position = Vector2(-103, -8)
