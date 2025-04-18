@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvp7t60oo6stx"]
+[gd_scene load_steps=3 format=3 uid="uid://cvp7t60oo6stx"]
 
 [ext_resource type="PackedScene" uid="uid://bwbxjswm3r7c7" path="res://actors/city/city.tscn" id="1_c4o8s"]
+[ext_resource type="Resource" uid="uid://dkln3gytuuij3" path="res://resources/cities/catun.tres" id="2_782v1"]
 
 [node name="Catun" type="Node2D"]
 
 [node name="City" parent="." instance=ExtResource("1_c4o8s")]
-modulate = Color(0.960784, 0.941176, 0.0862745, 1)
+city_config = ExtResource("2_782v1")

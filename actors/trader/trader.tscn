@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj3d8c6q7uvwm"]
+[gd_scene load_steps=13 format=3 uid="uid://cj3d8c6q7uvwm"]
 
 [ext_resource type="Script" uid="uid://w4il0iaqudy3" path="res://actors/trader/trader.gd" id="1_wji63"]
-[ext_resource type="Texture2D" uid="uid://b1kk028wpoimq" path="res://resources/trader.tres" id="2_nvoi6"]
-[ext_resource type="Script" uid="uid://bw8e2eng5tmge" path="res://addons/goap/brain.gd" id="3_7efwn"]
+[ext_resource type="Texture2D" uid="uid://b1kk028wpoimq" path="res://resources/textures/trader.tres" id="2_nvoi6"]
+[ext_resource type="Script" uid="uid://bw8e2eng5tmge" path="res://addons/goap/brain.gd" id="3_fa3m1"]
+[ext_resource type="Script" uid="uid://bf801fmu12qrc" path="res://addons/goap/action_planner.gd" id="4_esh5i"]
+[ext_resource type="Script" uid="uid://dgihqcth4132a" path="res://goals/make_profit.gd" id="4_fa3m1"]
+[ext_resource type="Script" uid="uid://e2it2saxgrcj" path="res://goals/make_camp.gd" id="5_dc6sx"]
+[ext_resource type="Curve" uid="uid://daq4g2r5hb3ie" path="res://addons/goap/curves/linear_curve.tres" id="5_e4gni"]
+[ext_resource type="Theme" uid="uid://bexp7qaxj4sjd" path="res://resources/ui_themes/base_theme.tres" id="7_j85uf"]
+[ext_resource type="StyleBox" uid="uid://dv5bcx08xidla" path="res://resources/ui_themes/same_border_flat_panel.tres" id="8_armnu"]
+[ext_resource type="Script" uid="uid://c8cd8516sjofl" path="res://actors/trader/goal_label.gd" id="9_armnu"]
+
+[sub_resource type="Resource" id="Resource_ad5j2"]
+script = ExtResource("4_esh5i")
+metadata/_custom_type_script = "uid://bf801fmu12qrc"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dc6sx"]
+radius = 6.0
+height = 18.0
 
 [node name="Trader" type="Node2D"]
 script = ExtResource("1_wji63")
@@ -10,10 +25,69 @@ script = ExtResource("1_wji63")
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(0.881643, 0.86416, 0.789673, 1)
 texture_filter = 1
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nvoi6")
 
-[node name="Brain" type="Node" parent="." node_paths=PackedStringArray("goals")]
-script = ExtResource("3_7efwn")
-goals = [null]
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+
+[node name="Brain" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_fa3m1")
+actor = NodePath("..")
+planner = SubResource("Resource_ad5j2")
 metadata/_custom_type_script = "uid://bw8e2eng5tmge"
+
+[node name="MakeProfit" type="Node" parent="Brain"]
+script = ExtResource("4_fa3m1")
+curve = ExtResource("5_e4gni")
+metadata/_custom_type_script = "uid://dgihqcth4132a"
+
+[node name="RestInCampsite" type="Node" parent="Brain"]
+script = ExtResource("5_dc6sx")
+curve = ExtResource("5_e4gni")
+metadata/_custom_type_script = "uid://e2it2saxgrcj"
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CapsuleShape2D_dc6sx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -20.0
+offset_right = 22.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("7_j85uf")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("8_armnu")
+metadata/_edit_lock_ = true
+
+[node name="GoalLabel" type="Label" parent="Control/Panel" node_paths=PackedStringArray("brain")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "Goal Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_armnu")
+brain = NodePath("../../../Brain")
+
+[connection signal="mouse_entered" from="Area" to="." method="_on_area_mouse_entered"]

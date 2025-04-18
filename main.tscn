@@ -16,7 +16,7 @@ ease = 2
 [node name="Main" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(127, -42)
+position = Vector2(111, -80)
 zoom = Vector2(4, 4)
 
 [node name="ColorRect" type="ColorRect" parent="Camera"]
@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 [node name="Overworld" parent="Level" instance=ExtResource("1_ig7tw")]
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
-position = Vector2(127, -42)
+position = Vector2(111, -80)
 script = ExtResource("3_lquwl")
 zoom = Vector2(4, 4)
 snap_to_pixel = true

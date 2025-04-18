@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CityConfig" load_steps=5 format=3 uid="uid://dkln3gytuuij3"]
+
+[ext_resource type="Script" uid="uid://dqfyfxephwvl6" path="res://globals/city_config.gd" id="1_12g85"]
+[ext_resource type="Resource" uid="uid://by81lwis0nku" path="res://resources/goods/chocolate.tres" id="3_12g85"]
+[ext_resource type="Script" uid="uid://c5eipmyhs6xse" path="res://globals/trade_good_stock.gd" id="3_dca1s"]
+
+[sub_resource type="Resource" id="Resource_sximv"]
+script = ExtResource("3_dca1s")
+trade_good = ExtResource("3_12g85")
+markup = 1.0
+volume = 100
+metadata/_custom_type_script = "uid://c5eipmyhs6xse"
+
+[resource]
+script = ExtResource("1_12g85")
+name = "Catun"
+color = Color(1, 1, 1, 1)
+stock = Array[ExtResource("3_dca1s")]([SubResource("Resource_sximv")])
+metadata/_custom_type_script = "uid://dqfyfxephwvl6"

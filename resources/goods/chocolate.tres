@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TradeGood" load_steps=2 format=3 uid="uid://by81lwis0nku"]
+
+[ext_resource type="Script" uid="uid://37wqaqsntk0c" path="res://globals/trade_good.gd" id="1_dpsy0"]
+
+[resource]
+script = ExtResource("1_dpsy0")
+name = "Chocolate"
+description = "Great resource with many applications"
+base_cost = 10
+metadata/_custom_type_script = "uid://37wqaqsntk0c"

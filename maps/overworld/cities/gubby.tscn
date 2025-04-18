@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://p4khg27ke6ie"]
+[gd_scene load_steps=3 format=3 uid="uid://p4khg27ke6ie"]
 
 [ext_resource type="PackedScene" uid="uid://bwbxjswm3r7c7" path="res://actors/city/city.tscn" id="1_vn5w5"]
+[ext_resource type="Resource" uid="uid://bb3s150j1db4l" path="res://resources/cities/gubby.tres" id="2_0hkya"]
 
 [node name="Gubby" type="Node2D"]
 
 [node name="City" parent="." instance=ExtResource("1_vn5w5")]
-modulate = Color(0.544608, 0.527882, 1, 1)
+city_config = ExtResource("2_0hkya")

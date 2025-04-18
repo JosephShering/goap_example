@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CityConfig" load_steps=5 format=3 uid="uid://crocrww2kffm0"]
+
+[ext_resource type="Script" uid="uid://dqfyfxephwvl6" path="res://globals/city_config.gd" id="1_4rrdk"]
+[ext_resource type="Resource" uid="uid://by81lwis0nku" path="res://resources/goods/chocolate.tres" id="3_4rrdk"]
+[ext_resource type="Script" uid="uid://c5eipmyhs6xse" path="res://globals/trade_good_stock.gd" id="3_chapo"]
+
+[sub_resource type="Resource" id="Resource_0dmpd"]
+script = ExtResource("3_chapo")
+trade_good = ExtResource("3_4rrdk")
+markup = 1.0
+volume = 90
+metadata/_custom_type_script = "uid://c5eipmyhs6xse"
+
+[resource]
+script = ExtResource("1_4rrdk")
+name = "Clagger"
+color = Color(1, 1, 1, 1)
+stock = Array[ExtResource("3_chapo")]([SubResource("Resource_0dmpd")])
+metadata/_custom_type_script = "uid://dqfyfxephwvl6"
